@@ -2,7 +2,7 @@ import { reactive } from 'vue'
 
 export const store = reactive ({
     apiParams: {
-        api_key: "524981c982f2f9eac53799da92481683",
+        api_key: import.meta.env.VITE_API_KEY,
         language: "it-IT",
         query: ""
     },

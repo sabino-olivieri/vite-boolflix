@@ -5,23 +5,22 @@
             <img :src="getImagePath(obj.poster_path)" alt="">  
         </div>
 
-        <!-- serieTV -->
-        <div class="ms_back-card p-4" v-if="obj.original_name != null">
-            <div class="row row-cols-2">
-                <div class="col-auto"><h5>Titolo:</h5></div>
-                <div class="col-auto">{{ obj.original_name }}</div>
-            </div>
-        </div>
+
 
         <!-- movie -->
-        <div class="ms_back-card p-4" v-else>
+        <div class="ms_back-card p-4">
             <div class="row g-3">
-                <div class="col-4"><span>Titolo:</span></div>
-                <div class="col-8">{{ obj.title }}</div>
+                <div class="col-4" ><span>Titolo:</span></div>
+                
+                <div class="col-8" v-if="obj.name != null">{{ obj.name }}</div>
+                <div class="col-8" v-else>{{ obj.title }}</div>
+
                 <div class="col-4"><span>Titolo originale:</span></div>
-                <div class="col-8">{{ obj.original_title }}</div>
+                <div class="col-8" v-if="obj.original_name != null">{{ obj.original_name }}</div>
+                <div class="col-8" v-else>{{ obj.original_title }}</div>
+
                 <div class="col-4"><span>Lingua:</span></div>
-                <div class="col-8">{{ obj.original_language }}</div>
+                <div class="col-8"><img :src="getImageFlag(obj.original_language)" class="flag" alt=""></div>
                 <div class="col-4"><span>Voto:</span></div>
                 <div class="col-8">{{ obj.vote_average }}</div>
             </div>
@@ -45,6 +44,10 @@
         methods: {
         getImagePath(img) {
             return new URL("https://image.tmdb.org/t/p/w342" + img, import.meta.url).href;
+        },
+
+        getImageFlag(img) {
+            return new URL(`../assets/flags/${img}.svg`, import.meta.url).href;
         }
     }
 
@@ -56,7 +59,7 @@
         background-color: white;
         border-radius: 10px;
         padding: 5px;
-        height: 100%;
+        height: 400px;
         
 
         .ms_front-card {
@@ -70,6 +73,12 @@
 
             span {
                 font-weight: bold;
+            }
+
+            .flag {
+                border-radius: 5px;
+                max-width: 30px;
+                border: 1px solid lightgray;
             }
         }
 

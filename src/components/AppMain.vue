@@ -11,7 +11,7 @@
                 </div> 
             </div>
 
-            <div class="row py-3 g-3" v-if="store.arrayTV.length > 0">
+            <div class="row py-3 g-3 justify-content-center" v-if="store.arrayTV.length > 0">
                 <div class="col-12 text-center">
                     <h2>Serie TV</h2>
                 </div>
