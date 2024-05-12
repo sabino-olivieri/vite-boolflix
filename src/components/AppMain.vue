@@ -2,29 +2,42 @@
     <main>
         <div class="container-lg mt-5 py-3">
             <div class="row">
-                <div class="col-12 text-center">
-                    <h2>Film</h2>
+                <div class="col text-center">
+                    <h2>Film {{ store.apiParams.query }}</h2>
+                </div>
+
+                <div class="col-auto">
+                    <select name="" id="" v-model="store.curGenreMovie">
+                        <option value="">All</option>
+                        <option :value="genre.id" v-for="genre in store.movieGenres">{{ genre.name }}</option>
+                    </select>
                 </div>
             </div>
-            <div class="row py-3 g-3 justify-content-center"  v-if="store.arrayMovie.length > 0">
+            <div class="row py-3 g-3 justify-content-center"  v-if="store.arrayMovie.length > 0 ">
 
-                <div class="col-12 col-md-6 col-lg-3" v-for="movie in store.arrayMovie">
-                    <AppCard :obj="movie" @buttonClicked="$emit('buttonClicked')"/>
-                </div> 
+                    <AppCard v-for="movie in store.arrayMovie" :obj="movie" @buttonClicked="$emit('buttonClicked')"/>
+                
             </div>  
 
             <AppNoResult v-else />
 
             <div class="row">
-                <div class="col-12 text-center">
-                    <h2>Serie TV</h2>
+                <div class="col text-center">
+                    <h2>Serie TV {{ store.apiParams.query }}</h2>
+                </div>
+
+                <div class="col-auto">
+                    <select name="" id="" v-model="store.curGenreTv">
+                        <option value="">All</option>
+                        <option :value="genre.id" v-for="genre in store.tvGenres">{{ genre.name }}</option>
+                    </select>
                 </div>
             </div>
 
             <div class="row py-3 g-3 justify-content-center" v-if="store.arrayTV.length > 0">
-                <div class="col-12 col-md-6 col-lg-3" v-for="tv in store.arrayTV" >
-                    <AppCard :obj="tv" @buttonClicked="$emit('buttonClicked')"/>
-                </div>
+                
+                    <AppCard v-for="tv in store.arrayTV" :obj="tv" @buttonClicked="$emit('buttonClicked')"/>
+
             </div>
 
             <AppNoResult v-else />
@@ -61,7 +74,7 @@ import AppNoResult from './AppNoResult.vue';
 
         .row {
             
-            .col-12 {
+            .col {
                 h2 {
                     color: black;
                     background-color: white;
@@ -69,6 +82,13 @@ import AppNoResult from './AppNoResult.vue';
                     margin: 0;
                     
                 }
+            }
+
+            select {
+                border: 0;
+                border-radius: 10px;
+                height: 100%;
+                padding: 5px
             }
 
 

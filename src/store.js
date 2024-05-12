@@ -14,5 +14,9 @@ export const store = reactive ({
         id: "",
         type: ""
     },
-    currentIdCast: null
+    currentIdCast: null,
+    movieGenres: [],
+    tvGenres: [],
+    curGenreMovie: "",
+    curGenreTv: "",
 })

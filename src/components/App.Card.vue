@@ -1,4 +1,5 @@
 <template>
+    <div class="col-12 col-md-6 col-lg-3" v-if="showCard(obj)">
     <div class="ms_card" @mouseleave="store.currentIdCast = []">
 
         <div class="ms_flip-card-inner">
@@ -43,6 +44,7 @@
 
 
     </div>
+</div>
 </template>
 
 <script>
@@ -80,6 +82,25 @@ export default {
             } else {
                 store.currentId.type = "tv";
             }
+        },
+
+        showCard(obj){
+            
+            if(!obj.original_title && store.curGenreTv === ""){
+                return true;
+            } else if (!obj.original_title && store.curGenreTv != "") {
+                return obj.genre_ids.includes(store.curGenreTv);
+            }
+
+            if(store.curGenreMovie != "") {
+
+                return obj.genre_ids.includes(store.curGenreMovie);
+
+            } else {
+                return true;
+
+            }
+
         }
     }
 

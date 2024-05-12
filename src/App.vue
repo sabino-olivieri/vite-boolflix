@@ -19,7 +19,27 @@ export default {
   data() {
     return {
       store,
-    }
+    }   
+  },
+
+  created() {
+    axios.get('https://api.themoviedb.org/3/genre/movie/list', {
+          params: {
+            api_key: import.meta.env.VITE_API_KEY,
+          }
+        }).then((resp) => {
+          console.log(resp);
+          this.store.movieGenres = resp.data.genres;
+        });
+
+        axios.get('https://api.themoviedb.org/3/genre/tv/list', {
+          params: {
+            api_key: import.meta.env.VITE_API_KEY,
+          }
+        }).then((resp) => {
+          console.log(resp);
+          this.store.tvGenres = resp.data.genres;
+        });
   },
 
   methods: {
