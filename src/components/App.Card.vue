@@ -12,21 +12,25 @@
             <div class="row g-3">
                 <div class="col-4" ><span>Titolo:</span></div>
                 
-                <div class="col-8" v-if="obj.name != null">{{ obj.name }}</div>
+                <div class="col-8" v-if="!!obj.name">{{ obj.name }}</div>
                 <div class="col-8" v-else>{{ obj.title }}</div>
 
                 <div class="col-4"><span>Titolo originale:</span></div>
-                <div class="col-8" v-if="obj.original_name != null">{{ obj.original_name }}</div>
+                <div class="col-8" v-if="!!obj.original_name">{{ obj.original_name }}</div>
                 <div class="col-8" v-else>{{ obj.original_title }}</div>
 
                 <div class="col-4"><span>Lingua:</span></div>
                 <div class="col-8"><img :src="getImageFlag(obj.original_language)" class="flag" alt=""></div>
                 <div class="col-4"><span>Voto:</span></div>
-                <div class="col-8">{{ obj.vote_average }}</div>
+                <div class="col-8">
+                    <i class="fa-solid fa-star" v-for="num in Math.round(obj.vote_average / 2)"></i>
+                    <i class="fa-regular fa-star" v-for="num in 5 - Math.round( obj.vote_average / 2)"></i>
+                    
+                </div> 
             </div>
         </div>
         
-    </div>
+    </div>  
 </template>
 
 <script>
@@ -40,6 +44,7 @@
                 
             }
         },
+
 
         methods: {
         getImagePath(img) {
@@ -79,6 +84,10 @@
                 border-radius: 5px;
                 max-width: 30px;
                 border: 1px solid lightgray;
+            }
+
+            .fa-star {
+                color: gold;
             }
         }
 
