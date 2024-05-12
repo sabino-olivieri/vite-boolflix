@@ -8,5 +8,11 @@ export const store = reactive ({
     },
 
     arrayMovie: [],
-    arrayTV: []
+    arrayTV: [],
+    isLoading: null,
+    currentId: {
+        id: "",
+        type: ""
+    },
+    currentIdCast: null
 })

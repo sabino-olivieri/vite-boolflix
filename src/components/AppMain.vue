@@ -1,24 +1,33 @@
 <template>
     <main>
-        <div class="container-lg">
-            <div class="row py-3 g-3 justify-content-center"  v-if="store.arrayMovie.length > 0">
+        <div class="container-lg mt-5 py-3">
+            <div class="row">
                 <div class="col-12 text-center">
                     <h2>Film</h2>
                 </div>
+            </div>
+            <div class="row py-3 g-3 justify-content-center"  v-if="store.arrayMovie.length > 0">
 
                 <div class="col-12 col-md-6 col-lg-3" v-for="movie in store.arrayMovie">
-                    <AppCard :obj="movie"/>
+                    <AppCard :obj="movie" @buttonClicked="$emit('buttonClicked')"/>
                 </div> 
-            </div>
+            </div>  
 
-            <div class="row py-3 g-3 justify-content-center" v-if="store.arrayTV.length > 0">
+            <AppNoResult v-else />
+
+            <div class="row">
                 <div class="col-12 text-center">
                     <h2>Serie TV</h2>
                 </div>
+            </div>
+
+            <div class="row py-3 g-3 justify-content-center" v-if="store.arrayTV.length > 0">
                 <div class="col-12 col-md-6 col-lg-3" v-for="tv in store.arrayTV" >
-                    <AppCard :obj="tv"/>
+                    <AppCard :obj="tv" @buttonClicked="$emit('buttonClicked')"/>
                 </div>
             </div>
+
+            <AppNoResult v-else />
         </div>
     </main>
 </template>
@@ -26,10 +35,12 @@
 <script>
 import AppCard from './App.Card.vue';
 import { store } from '../store';
+import AppNoResult from './AppNoResult.vue';
 
     export default {
         components: {
             AppCard,
+                AppNoResult,
         },
 
         data() {
@@ -37,7 +48,9 @@ import { store } from '../store';
 
                 store
             }
-        }
+        },
+
+
     }
 </script>
 
@@ -53,6 +66,7 @@ import { store } from '../store';
                     color: black;
                     background-color: white;
                     border-radius: 10px;
+                    margin: 0;
                     
                 }
             }

@@ -1,6 +1,6 @@
 <template>
   <AppHeader @clicked="getList()" @enterKeyUp="getList()" />
-  <AppMain />
+  <AppMain @buttonClicked="getCast()"/>
 </template>
 
 <script>
@@ -44,6 +44,36 @@ export default {
       }
 
 
+    },
+
+    getCast() {
+
+      store.isLoading = true;
+      store.currentIdCast = [];  
+      setTimeout(()=> {
+        console.log("cast");
+        axios.get('https://api.themoviedb.org/3/'+ store.currentId.type + "/" + store.currentId.id + "/credits", {
+            params: {
+              api_key: import.meta.env.VITE_API_KEY,
+            }
+          }).then((resp) => {
+            console.log(resp);
+            if(resp.data.cast.length > 0) {
+              for(let i = 0; i < 5; i++) {
+                
+                if(i < resp.data.cast.length) {
+
+                  store.currentIdCast.push(resp.data.cast[i].name);
+                } 
+                
+                  
+              }
+            } else {
+              store.currentIdCast.push("Nessun attore trovato");
+            }
+            store.isLoading = false;
+          });
+      },500);
     }
   }
 }

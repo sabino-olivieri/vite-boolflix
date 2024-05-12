@@ -1,5 +1,5 @@
 <template>
-    <header class="d-flex align-items-center text-center px-3 mb-3">
+    <header class="d-flex align-items-center text-center px-3">
         <div class="container-fluid">
             <div class="row justify-content-between ">
                 <div class="col-12 col-md-auto py-1">
